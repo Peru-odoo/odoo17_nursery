@@ -1,0 +1,81 @@
+<odoo>
+    <record id="product_template_secondary_uom_buttons" model="ir.ui.view">
+        <field name="name">product.template.secondary.uom.header.buttons</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//form/header" position="inside">-->
+<!--                <button name="action_show_secondary_onhand"-->
+<!--                        string="On Hand Dozens"-->
+<!--                        type="object"-->
+<!--                        class="oe_highlight"-->
+<!--                        icon="fa-cubes"-->
+<!--                        invisible="secondary_qty_available == 0"/>-->
+
+<!--                <button name="action_show_secondary_forecast"-->
+<!--                        string="Forecasted Dozens"-->
+<!--                        type="object"-->
+<!--                        class="oe_highlight"-->
+<!--                        icon="fa-cube"-->
+<!--                        invisible="secondary_virtual_available == 0"/>-->
+
+<!--                &lt;!&ndash; Hidden fields required by Odoo to evaluate visibility &ndash;&gt;-->
+<!--                <field name="secondary_qty_available" invisible="1"/>-->
+<!--                <field name="secondary_virtual_available" invisible="1"/>-->
+<!--            </xpath>-->
+                            <xpath expr="//form/header" position="inside">
+                    <button name="action_show_secondary_onhand"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-cubes">
+                        <field name="secondary_qty_available"
+                               widget="statinfo"
+                               string="On Hand Dozens"/>
+                    </button>
+                    <button name="action_show_secondary_forecast"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-cube">
+                        <field name="secondary_virtual_available"
+                               widget="statinfo"
+                               string="Forecasted Dozens"/>
+                    </button>
+                </xpath>
+
+                <!-- Add fields to the form to make sure Odoo renders them -->
+                <xpath expr="//form" position="inside">
+                    <field name="secondary_qty_available" invisible="1"/>
+                    <field name="secondary_virtual_available" invisible="1"/>
+                </xpath>
+
+
+        </field>
+    </record>
+</odoo>
+
+
+<!--    <record id="product_template_secondary_uom_buttons" model="ir.ui.view">-->
+<!--        <field name="name">product.template.secondary.uom.buttons</field>-->
+<!--        <field name="model">product.template</field>-->
+<!--        <field name="inherit_id" ref="product.product_template_only_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[@name='button_box']" position="inside">-->
+<!--                <button name="action_open_quants"-->
+<!--                        type="object"-->
+<!--                        class="oe_stat_button"-->
+<!--                        icon="fa-cubes">-->
+<!--                    <field name="secondary_qty_available"-->
+<!--                           widget="statinfo"-->
+<!--                           string="On Hand Dozens"/>-->
+<!--                </button>-->
+<!--                <button name="action_open_quants"-->
+<!--                        type="object"-->
+<!--                        class="oe_stat_button"-->
+<!--                        icon="fa-cube">-->
+<!--                    <field name="secondary_virtual_available"-->
+<!--                           widget="statinfo"-->
+<!--                           string="Forecasted Dozens"/>-->
+<!--                </button>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->

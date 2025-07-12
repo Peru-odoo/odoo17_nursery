@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem id="menu_bulk_uom_calc"
+              name="Bulk UoM Calculator"
+              parent="stock.menu_stock_config_settings"
+              action="action_uom_bulk_calc"
+              sequence="100"/>
+</odoo>

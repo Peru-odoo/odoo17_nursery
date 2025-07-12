@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="admission_website_form" name="Nursery Admission Form">
+        <t t-call="website.layout">
+            <div class="container mt-5 mb-5">
+                <h2>Nursery Application Form</h2>
+                <form action="/nursery/submit" method="POST">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <div class="form-group">
+                        <label>Child Name</label>
+                        <input type="text" name="child_name" class="form-control" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Birth Date</label>
+                        <input type="date" name="birth_date" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender" class="form-control">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Parent</label>
+                        <select name="parent_id" class="form-control" required="required">
+                            <t t-foreach="parents" t-as="parent">
+                                <option t-att-value="parent.id">
+                                    <t t-esc="parent.name"/> (<t t-esc="parent.email"/>)
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="admission_thankyou" name="Thank You Page">
+        <t t-call="website.layout">
+            <div class="container mt-5 mb-5 text-center">
+                <h2>Thank You!</h2>
+                <p>Your application has been submitted successfully.</p>
+                <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+            </div>
+        </t>
+    </template>
+</odoo>

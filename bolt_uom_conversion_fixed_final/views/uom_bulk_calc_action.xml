@@ -1,0 +1,8 @@
+<odoo>
+    <record id="action_uom_bulk_calc" model="ir.actions.act_window">
+        <field name="name">Bulk UoM Calculator</field>
+        <field name="res_model">uom.bulk.calc.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
