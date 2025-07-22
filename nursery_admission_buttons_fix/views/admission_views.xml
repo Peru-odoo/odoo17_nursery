@@ -1,65 +1,69 @@
 <odoo>
     <data>
-        <record id="view_nursery_admission_tree" model="ir.ui.view">
-                <field name="name">nursery.admission.tree</field>
-                <field name="model">nursery.admission</field>
-                <field name="arch" type="xml">
-                    <tree>
-                        <field name="child_name"/>
-                        <field name="birth_date"/>
-                        <field name="gender"/>
-                        <field name="application_date"/>
-                        <field name="status"/>
-                        <field name="parent_id"/>
-                    </tree>
-                </field>
+
+        <!-- Tree View -->
+        <record id="nursery_admission_tree_view" model="ir.ui.view">
+            <field name="name">nursery.admission.tree</field>
+            <field name="model">nursery.admission</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="child_name"/>
+                    <field name="birth_date"/>
+                    <field name="gender"/>
+                    <field name="application_date"/>
+                    <field name="parent_id"/>
+                    <field name="stage_id"/>
+                </tree>
+            </field>
         </record>
 
-
-        <!-- Main Nursery Admission Form View -->
+        <!-- Form View -->
         <record id="nursery_admission_form_view" model="ir.ui.view">
             <field name="name">nursery.admission.form</field>
             <field name="model">nursery.admission</field>
             <field name="arch" type="xml">
-                <form string="Nursery Admission" class="o_form_nursery_admission">
-                    <header>
-                        <button name="action_accept"
-                                type="object"
-                                string="Accept"
-                                class="btn btn-primary"
-                                modifiers="{'invisible': [('status', '!=', 'submitted')]}"/>
-                        <button name="action_reject"
-                                type="object"
-                                string="Reject"
-                                class="btn btn-danger"
-                                modifiers="{'invisible': [('status', '!=', 'submitted')]}"/>
-                        <field name="status"
-                               widget="statusbar"
-                               statusbar_visible="draft,submitted,accepted,rejected"/>
-                    </header>
+            <form string="Nursery Admission" class="o_nursery_form">
+                    <field name="active" invisible="1"/>
 
                     <sheet>
+                        <div class="d-flex align-items-center justify-content-between" style="margin-bottom: 15px;">
+                             <button string="Refuse"
+                                    name="action_reject"
+                                    type="object"
+                                    modifiers="{'invisible': [('active', '=', False)]}"
+                                    data-hotkey="d"/>
+                            <field name="stage_id"
+                                   widget="statusbar"
+                                   options="{'clickable': '1'}"
+                                   class="oe_inline"/>
+
+
+                        </div>
+
                         <group>
-                            <field name="child_name"/>
                             <field name="birth_date"/>
                             <field name="gender"/>
-                            <field name="application_date"/>
+                            <field name="application_date" readonly="1"/>
                             <field name="parent_id"/>
                         </group>
 
                         <notebook>
                             <page string="Application Summary">
-                                <field name="message_ids"
-                                       widget="mail_thread"
-                                       options="{'post_refresh': 'always'}"/>
+                                <field name="description" placeholder="Parent's notes or child info..."/>
                             </page>
                             <page string="Followers">
-                                <field name="message_follower_ids"
-                                       widget="mail_followers"/>
+                                <field name="message_follower_ids" widget="mail_followers"/>
                             </page>
                         </notebook>
                     </sheet>
-                </form>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'always'}"/>
+                    </div>
+            </form>
+
             </field>
         </record>
 
@@ -72,7 +76,91 @@
 
         <!-- Menu -->
         <menuitem id="menu_nursery_root" name="Nursery" sequence="1"/>
-        <menuitem id="menu_nursery_admission" name="Applications" parent="menu_nursery_root" action="action_nursery_admission"/>
+        <menuitem id="menu_nursery_admission"
+                  name="Applications"
+                  parent="menu_nursery_root"
+                  action="action_nursery_admission"/>
 
     </data>
 </odoo>
+
+
+
+<!--<odoo>-->
+<!--    <data>-->
+<!--        <record id="view_nursery_admission_tree" model="ir.ui.view">-->
+<!--                <field name="name">nursery.admission.tree</field>-->
+<!--                <field name="model">nursery.admission</field>-->
+<!--                <field name="arch" type="xml">-->
+<!--                    <tree>-->
+<!--                        <field name="child_name"/>-->
+<!--                        <field name="birth_date"/>-->
+<!--                        <field name="gender"/>-->
+<!--                        <field name="application_date"/>-->
+<!--                        <field name="status"/>-->
+<!--                        <field name="parent_id"/>-->
+<!--                    </tree>-->
+<!--                </field>-->
+<!--        </record>-->
+
+
+<!--        &lt;!&ndash; Main Nursery Admission Form View &ndash;&gt;-->
+<!--        <record id="nursery_admission_form_view" model="ir.ui.view">-->
+<!--            <field name="name">nursery.admission.form</field>-->
+<!--            <field name="model">nursery.admission</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Nursery Admission" class="o_form_nursery_admission">-->
+<!--                    <header>-->
+<!--                        <button name="action_accept"-->
+<!--                                type="object"-->
+<!--                                string="Accept"-->
+<!--                                class="btn btn-primary"-->
+<!--                                modifiers="{'invisible': [('status', '!=', 'submitted')]}"/>-->
+<!--                        <button name="action_reject"-->
+<!--                                type="object"-->
+<!--                                string="Reject"-->
+<!--                                class="btn btn-danger"-->
+<!--                                modifiers="{'invisible': [('status', '!=', 'submitted')]}"/>-->
+<!--                        <field name="status"-->
+<!--                               widget="statusbar"-->
+<!--                               statusbar_visible="draft,submitted,accepted,rejected"/>-->
+<!--                    </header>-->
+
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="child_name"/>-->
+<!--                            <field name="birth_date"/>-->
+<!--                            <field name="gender"/>-->
+<!--                            <field name="application_date"/>-->
+<!--                            <field name="parent_id"/>-->
+<!--                        </group>-->
+
+<!--                        <notebook>-->
+<!--                            <page string="Application Summary">-->
+<!--                                <field name="message_ids"-->
+<!--                                       widget="mail_thread"-->
+<!--                                       options="{'post_refresh': 'always'}"/>-->
+<!--                            </page>-->
+<!--                            <page string="Followers">-->
+<!--                                <field name="message_follower_ids"-->
+<!--                                       widget="mail_followers"/>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Action &ndash;&gt;-->
+<!--        <record id="action_nursery_admission" model="ir.actions.act_window">-->
+<!--            <field name="name">Nursery Applications</field>-->
+<!--            <field name="res_model">nursery.admission</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Menu &ndash;&gt;-->
+<!--        <menuitem id="menu_nursery_root" name="Nursery" sequence="1"/>-->
+<!--        <menuitem id="menu_nursery_admission" name="Applications" parent="menu_nursery_root" action="action_nursery_admission"/>-->
+
+<!--    </data>-->
+<!--</odoo>-->

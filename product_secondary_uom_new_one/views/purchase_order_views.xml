@@ -1,23 +1,47 @@
 <odoo>
-    <record id="product_template_secondary_uom_buttons" model="ir.ui.view">
-        <field name="name">product.template.secondary.uom.buttons</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <record id="view_purchase_order_form_secondary_uom" model="ir.ui.view">
+        <field name="name">purchase.order.form.secondary.uom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//form//sheet//div[@class='oe_button_box']" position="inside">
-                <button type="object"
-                        name="action_open_quants"
-                        class="oe_stat_button"
-                        icon="fa-cubes">
-                    <field name="secondary_qty_available" widget="statinfo" string="On Hand Dozens"/>
-                </button>
-                <button type="object"
-                        name="action_open_quants"
-                        class="oe_stat_button"
-                        icon="fa-cube">
-                    <field name="secondary_virtual_available" widget="statinfo" string="Forecasted Dozens"/>
-                </button>
+
+            <!-- TREE view: Insert after UoM that is visible -->
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_uom' and not(@column_invisible)]" position="after">
+                <field name="secondary_qty" />
+                <field name="secondary_uom_id" />
             </xpath>
+
+            <!-- FORM view: Insert after UoM inside .o_row for correct placement -->
+            <xpath expr="//field[@name='order_line']/form//div[@class='o_row']/field[@name='product_uom']" position="after">
+                <field name="secondary_qty" />
+                <field name="secondary_uom_id" />
+            </xpath>
+
         </field>
     </record>
 </odoo>
+
+
+<!--<odoo>-->
+<!--    <record id="product_template_secondary_uom_buttons" model="ir.ui.view">-->
+<!--        <field name="name">product.template.secondary.uom.buttons</field>-->
+<!--        <field name="model">product.template</field>-->
+<!--        <field name="inherit_id" ref="product.product_template_only_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form//sheet//div[@class='oe_button_box']" position="inside">-->
+<!--                <button type="object"-->
+<!--                        name="action_open_quants"-->
+<!--                        class="oe_stat_button"-->
+<!--                        icon="fa-cubes">-->
+<!--                    <field name="secondary_qty_available" widget="statinfo" string="On Hand Dozens"/>-->
+<!--                </button>-->
+<!--                <button type="object"-->
+<!--                        name="action_open_quants"-->
+<!--                        class="oe_stat_button"-->
+<!--                        icon="fa-cube">-->
+<!--                    <field name="secondary_virtual_available" widget="statinfo" string="Forecasted Dozens"/>-->
+<!--                </button>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

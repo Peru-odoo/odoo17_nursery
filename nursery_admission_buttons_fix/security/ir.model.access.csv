@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_nursery_admission,nursery.admission,model_nursery_admission,,1,1,1,1
+access_nursery_admission_stage,nursery.admission.stage,model_nursery_admission_stage,,1,1,1,1
+access_nursery_admission_stage_user,access.nursery.admission.stage.user,model_nursery_admission_stage,base.group_user,1,1,1,1

@@ -1,29 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <data>
+    <data>
+        <record id="nursery_admission_approved_template" model="mail.template">
+            <field name="name">Nursery Admission Accepted</field>
+            <field name="model_id" ref="model_nursery_admission"/>
+            <field name="subject">Your child has been accepted</field>
+            <field name="email_to">${object.parent_id.email}</field>
+            <field name="body_html" type="html">
 
-    <record id="nursery_admission_approved_template" model="mail.template">
-      <field name="name">Nursery Admission Accepted</field>
-      <field name="model_id" ref="model_nursery_admission"/>
-      <field name="subject">Your child has been accepted</field>
-      <field name="email_to">${object.parent_id.email}</field>
-      <field name="body_html" type="html">
-        <p>Dear ${object.parent_id.name},</p>
-        <p>Your child <strong>${object.child_name}</strong> has been <strong>accepted</strong> into the nursery.</p>
-        <p>Thank you.</p>
-      </field>
-    </record>
+                    <p>Dear ${object.parent_id.name},</p>
+                    <p>Your child <strong>${object.child_name}</strong> has been <strong>accepted</strong> into the nursery.</p>
+                    <p>Thank you.</p>
 
-    <record id="nursery_admission_rejected_template" model="mail.template">
-      <field name="name">Nursery Admission Rejected</field>
-      <field name="model_id" ref="model_nursery_admission"/>
-      <field name="subject">Nursery Admission Status</field>
-      <field name="email_to">${object.parent_id.email}</field>
-      <field name="body_html" type="html">
-        <p>Dear ${object.parent_id.name},</p>
-        <p>We regret to inform you that your child <strong>${object.child_name}</strong> has <strong>not been accepted</strong> at this time.</p>
-        <p>Thank you for your interest.</p>
-      </field>
-    </record>
+            </field>
+        </record>
 
-  </data>
+        <record id="nursery_admission_rejected_template" model="mail.template">
+            <field name="name">Nursery Admission Rejected</field>
+            <field name="model_id" ref="model_nursery_admission"/>
+            <field name="subject">Nursery Admission Status</field>
+            <field name="email_to">${object.parent_id.email}</field>
+            <field name="body_html" type="html">
+
+                    <p>Dear ${object.parent_id.name},</p>
+                    <p>We regret to inform you that your child <strong>${object.child_name}</strong> has <strong>not been accepted</strong> at this time.</p>
+                    <p>Thank you for your interest.</p>
+
+            </field>
+        </record>
+    </data>
 </odoo>
+
+
+
+
+<!--<odoo>-->
+<!--  <data>-->
+
+<!--    <record id="nursery_admission_approved_template" model="mail.template">-->
+<!--      <field name="name">Nursery Admission Accepted</field>-->
+<!--      <field name="model_id" ref="model_nursery_admission"/>-->
+<!--      <field name="subject">Your child has been accepted</field>-->
+<!--      <field name="email_to">${object.parent_id.email}</field>-->
+<!--      <field name="body_html" type="html">-->
+<!--        <p>Dear ${object.parent_id.name},</p>-->
+<!--        <p>Your child <strong>${object.child_name}</strong> has been <strong>accepted</strong> into the nursery.</p>-->
+<!--        <p>Thank you.</p>-->
+<!--      </field>-->
+<!--    </record>-->
+
+<!--    <record id="nursery_admission_rejected_template" model="mail.template">-->
+<!--      <field name="name">Nursery Admission Rejected</field>-->
+<!--      <field name="model_id" ref="model_nursery_admission"/>-->
+<!--      <field name="subject">Nursery Admission Status</field>-->
+<!--      <field name="email_to">${object.parent_id.email}</field>-->
+<!--      <field name="body_html" type="html">-->
+<!--        <p>Dear ${object.parent_id.name},</p>-->
+<!--        <p>We regret to inform you that your child <strong>${object.child_name}</strong> has <strong>not been accepted</strong> at this time.</p>-->
+<!--        <p>Thank you for your interest.</p>-->
+<!--      </field>-->
+<!--    </record>-->
+
+<!--  </data>-->
+<!--</odoo>-->

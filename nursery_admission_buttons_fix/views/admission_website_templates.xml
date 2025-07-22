@@ -1,38 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="admission_website_form" name="Nursery Admission Form">
+    <template id="admission_website_form" name="Admission Form">
         <t t-call="website.layout">
-            <div class="container mt-5 mb-5">
-                <h2>Nursery Application Form</h2>
-                <form action="/nursery/submit" method="POST">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <div class="container mt-5">
+                <h1>Admission Inquiry</h1>
+                <form action="/nursery/submit" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Child's Name</label>
+                            <input type="text" name="child_name" class="form-control" required="required"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Date of Birth</label>
+                            <input type="date" name="birth_date" class="form-control" required="required"/>
+                        </div>
+                    </div>
 
-                    <div class="form-group">
-                        <label>Child Name</label>
-                        <input type="text" name="child_name" class="form-control" required="required"/>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                            <select name="gender" class="form-control">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Parent</label>
+                            <select name="parent_id" class="form-control">
+                                <t t-foreach="parents" t-as="parent">
+                                    <option t-att-value="parent.id"><t t-esc="parent.name"/></option>
+                                </t>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Birth Date</label>
-                        <input type="date" name="birth_date" class="form-control"/>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label>Reason for Applying</label>
+                            <textarea name="reason_for_applying" class="form-control" required="required"></textarea>
+
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select name="gender" class="form-control">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
+
+                    <div class="row mt-4">
+                        <div class="col text-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Parent</label>
-                        <select name="parent_id" class="form-control" required="required">
-                            <t t-foreach="parents" t-as="parent">
-                                <option t-att-value="parent.id">
-                                    <t t-esc="parent.name"/> (<t t-esc="parent.email"/>)
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
                 </form>
             </div>
         </t>
@@ -40,10 +54,9 @@
 
     <template id="admission_thankyou" name="Thank You Page">
         <t t-call="website.layout">
-            <div class="container mt-5 mb-5 text-center">
-                <h2>Thank You!</h2>
-                <p>Your application has been submitted successfully.</p>
-                <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+            <div class="container mt-5">
+                <h1>Thank You!</h1>
+                <p>Your application has been received. We will get back to you shortly.</p>
             </div>
         </t>
     </template>
