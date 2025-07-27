@@ -1,0 +1,10 @@
+<odoo>
+    <report
+        id="property_report_pdf"
+        model="real.estate.property"
+        string="Property Report"
+        report_type="qweb-pdf"
+        name="real_estate.report_template"
+        file="real_estate.report_template"
+    />
+</odoo>

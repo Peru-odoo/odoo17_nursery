@@ -1,0 +1,25 @@
+<odoo>
+    <template id="report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Property: <t t-field="doc.name"/></h2>
+                    <p><strong>Price:</strong> <t t-field="doc.price"/></p>
+                    <p><strong>Area:</strong> <t t-field="doc.area"/> sqft</p>
+                    <p><strong>Bedrooms:</strong> <t t-field="doc.bedrooms"/></p>
+                    <p><strong>Bathrooms:</strong> <t t-field="doc.bathrooms"/></p>
+                    <p><strong>Address:</strong> <t t-field="doc.address"/></p>
+                    <p><strong>Agent:</strong> <t t-field="doc.agent_id.name"/></p>
+                    <t t-if="doc.feature_ids">
+                        <h4>Features:</h4>
+                        <ul>
+                            <t t-foreach="doc.feature_ids" t-as="feat">
+                                <li><t t-field="feat.name"/>: <t t-field="feat.value"/></li>
+                            </t>
+                        </ul>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

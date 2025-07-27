@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property,access_property,model_real_estate_property,,1,1,1,1
+access_agent,access_agent,model_real_estate_agent,,1,1,1,1
+access_booking,access_booking,model_real_estate_booking,,1,1,1,1
+access_feature,access_feature,model_real_estate_feature,,1,1,1,1

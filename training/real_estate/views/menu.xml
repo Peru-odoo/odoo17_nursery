@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="real_estate_root" name="Real Estate"/>
+    <menuitem id="menu_property" name="Properties" parent="real_estate_root"/>
+    <menuitem id="menu_agent" name="Agents" parent="real_estate_root"/>
+    <menuitem id="menu_booking" name="Bookings" parent="real_estate_root"/>
+</odoo>

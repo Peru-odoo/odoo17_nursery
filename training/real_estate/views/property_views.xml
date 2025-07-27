@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_property_list" model="ir.ui.view">
+        <field name="name">real.estate.property.list</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="price"/>
+                <field name="area"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_property_form" model="ir.ui.view">
+        <field name="name">real.estate.property.form</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="price"/>
+                        <field name="area"/>
+                        <field name="bedrooms"/>
+                        <field name="bathrooms"/>
+                        <field name="address"/>
+                        <field name="status"/>
+                        <field name="agent_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Features">
+                            <field name="feature_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bookings">
+                            <field name="booking_ids">
+                                <list>
+                                    <field name="buyer_id"/>
+                                    <field name="booking_date"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_properties" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">real.estate.property</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
