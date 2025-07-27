@@ -2,7 +2,7 @@
     "name": "Nursery Admission Buttons Fix new",
     "version": "1.0",
     "depends": ["base", "mail", "website"],
-    "author": "Basel Amr",
+    "author": "Basel Amrr",
     "category": "Custom",
 
     "data": [
