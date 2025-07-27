@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit Sale Order Form View: Add Secondary Qty & Secondary UOM Columns -->
+    <record id="view_order_form_secondary_uom" model="ir.ui.view">
+        <field name="name">sale.order.form.secondary.uom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                <field name="secondary_qty" readonly="1"/>
+                <field name="secondary_uom_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ✅ FIXED: Correct inherit_id for sale.order.line form view -->
+    <record id="view_order_line_form_secondary_uom" model="ir.ui.view">
+        <field name="name">sale.order.line.form.secondary.uom</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="secondary_qty" readonly="1"/>
+                <field name="secondary_uom_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Restore the Delivery Smart Button -->
+    <record id="view_order_form_delivery_button_restore" model="ir.ui.view">
+        <field name="name">sale.order.form.restore.delivery.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(stock.action_picking_tree_all)d"
+                        string="Delivery"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-truck"
+                        attrs="{'invisible': [('picking_ids', '=', False)]}">
+                    <field name="picking_ids" widget="statinfo" stat_button="1"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

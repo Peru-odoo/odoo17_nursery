@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sale_order_form_delivery_button_fix" model="ir.ui.view">
+        <field name="name">sale.order.form.delivery.button.fix</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(stock.action_picking_tree_all)d"
+                        type="action"
+                        string="Delivery"
+                        class="oe_stat_button"
+                        icon="fa-truck"
+                        attrs="{'invisible': [('picking_ids', '=', False)]}">
+                    <field name="picking_ids" widget="statinfo" stat_button="1"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

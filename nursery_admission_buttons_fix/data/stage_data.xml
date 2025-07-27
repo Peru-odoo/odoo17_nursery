@@ -1,5 +1,10 @@
 <odoo>
     <data>
+        <record id="stage_submitted" model="nursery.admission.stage">
+                <field name="name">Submitted</field>
+                <field name="sequence">0</field>
+        </record>
+
         <record id="stage_draft" model="nursery.admission.stage">
             <field name="name">New</field>
             <field name="sequence">1</field>

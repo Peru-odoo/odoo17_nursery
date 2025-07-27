@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_purchase_order_line_form_secondary_uom" model="ir.ui.view">
+    <field name="name">purchase.order.line.form.secondary.uom</field>
+    <field name="model">purchase.order.line</field>
+    <field name="inherit_id" ref="purchase.purchase_order_line_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='product_uom']" position="after">
+        <field name="secondary_qty" readonly="1"/>
+        <field name="secondary_uom_id" readonly="1"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

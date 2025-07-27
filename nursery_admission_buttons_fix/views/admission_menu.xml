@@ -1,38 +1,56 @@
 <odoo>
-      <record id="nursery_admission_buttons_fix.action_nursery_admission_stage" model="ir.actions.act_window">
-        <field name="name">Admissions</field>
-        <field name="res_model">nursery.admission</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
+    <!-- Root menu -->
     <menuitem id="menu_nursery_admission_root" name="Nursery" sequence="10"/>
+
+    <!-- Admissions menu -->
     <menuitem id="menu_nursery_admission"
               name="Admissions"
               parent="menu_nursery_admission_root"
               action="nursery_admission_buttons_fix.action_nursery_admission"
+              sequence="10"/>
+
+    <!-- ✅ Reporting menu -->
+    <menuitem id="menu_nursery_admission_reporting"
+              name="Reporting"
+              parent="menu_nursery_admission_root"
+              groups="base.group_user"
               sequence="20"/>
 
-    <menuitem
-            id="menu_nursery_admission_configuration"
-            name="Configuration"
-            parent="menu_nursery_admission_root"
-            groups="base.group_user"
-            sequence="100"/>
+    <!-- Dummy Reporting Action -->
+    <record id="action_nursery_reporting_dummy" model="ir.actions.act_window">
+        <field name="name">Dummy Report</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
+    <!-- ✅ Dummy Reporting menu under Reporting -->
+    <menuitem id="menu_nursery_reporting_dummy"
+              name="Dummy Report"
+              parent="menu_nursery_admission_reporting"
+              action="nursery_admission_buttons_fix.action_nursery_reporting_dummy"
+              sequence="10"/>
 
+    <!-- Configuration menu -->
+    <menuitem id="menu_nursery_admission_configuration"
+              name="Configuration"
+              parent="menu_nursery_admission_root"
+              groups="base.group_user"
+              sequence="30"/>
 
+    <!-- Admission Stages menu -->
     <menuitem id="menu_nursery_admission_stage"
-          name="Stages"
-          parent="menu_nursery_admission_configuration"
-          action="nursery_admission_buttons_fix.action_nursery_admission_stage"/>
+              name="Stages"
+              parent="menu_nursery_admission_configuration"
+              action="nursery_admission_buttons_fix.action_nursery_admission_stage"/>
 
-
+    <!-- Admission Stages Action -->
     <record id="action_nursery_admission_stage" model="ir.actions.act_window">
         <field name="name">Admission Stages</field>
         <field name="res_model">nursery.admission.stage</field>
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Admission Stages Tree View -->
     <record id="view_nursery_admission_stage_tree" model="ir.ui.view">
         <field name="name">nursery.admission.stage.tree</field>
         <field name="model">nursery.admission.stage</field>
@@ -46,6 +64,7 @@
         </field>
     </record>
 
+    <!-- Admission Stages Form View -->
     <record id="view_nursery_admission_stage_form" model="ir.ui.view">
         <field name="name">nursery.admission.stage.form</field>
         <field name="model">nursery.admission.stage</field>
@@ -60,5 +79,93 @@
             </form>
         </field>
     </record>
-
 </odoo>
+
+<!--<odoo>-->
+<!--      <record id="nursery_admission_buttons_fix.action_nursery_admission_stage" model="ir.actions.act_window">-->
+<!--        <field name="name">Admissions</field>-->
+<!--        <field name="res_model">nursery.admission</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <menuitem id="menu_nursery_admission_root" name="Nursery" sequence="10"/>-->
+<!--    <menuitem id="menu_nursery_admission"-->
+<!--              name="Admissions"-->
+<!--              parent="menu_nursery_admission_root"-->
+<!--              action="nursery_admission_buttons_fix.action_nursery_admission"-->
+<!--              sequence="10"/>-->
+
+<!--    <menuitem-->
+<!--            id="menu_nursery_admission_reporting"-->
+<!--            name="reporting"-->
+<!--            parent="menu_nursery_admission_root"-->
+<!--            groups="base.group_user"-->
+<!--            sequence="20"/>-->
+
+
+<!--    <menuitem-->
+<!--            id="menu_nursery_admission_configuration"-->
+<!--            name="Configuration"-->
+<!--            parent="menu_nursery_admission_root"-->
+<!--            groups="base.group_user"-->
+<!--            sequence="30"/>-->
+
+
+
+
+<!--        <record id="action_nursery_reporting_dummy" model="ir.actions.act_window">-->
+<!--        <field name="name">Dummy Report</field>-->
+<!--        <field name="res_model">res.partner</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--    <menuitem id="menu_nursery_reporting_dummy"-->
+<!--              name="Dummy Report"-->
+<!--              parent="menu_nursery_reporting"-->
+<!--              action="nursery_admission_buttons_fix.action_nursery_reporting_dummy"-->
+<!--              sequence="10"/>-->
+
+
+
+
+<!--    <menuitem id="menu_nursery_admission_stage"-->
+<!--          name="Stages"-->
+<!--          parent="menu_nursery_admission_configuration"-->
+<!--          action="nursery_admission_buttons_fix.action_nursery_admission_stage"/>-->
+
+
+<!--    <record id="action_nursery_admission_stage" model="ir.actions.act_window">-->
+<!--        <field name="name">Admission Stages</field>-->
+<!--        <field name="res_model">nursery.admission.stage</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <record id="view_nursery_admission_stage_tree" model="ir.ui.view">-->
+<!--        <field name="name">nursery.admission.stage.tree</field>-->
+<!--        <field name="model">nursery.admission.stage</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="name"/>-->
+<!--                <field name="sequence"/>-->
+<!--                <field name="is_done"/>-->
+<!--                <field name="fold"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_nursery_admission_stage_form" model="ir.ui.view">-->
+<!--        <field name="name">nursery.admission.stage.form</field>-->
+<!--        <field name="model">nursery.admission.stage</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <group>-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="sequence"/>-->
+<!--                    <field name="is_done"/>-->
+<!--                    <field name="fold"/>-->
+<!--                </group>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--</odoo>-->

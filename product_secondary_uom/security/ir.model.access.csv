@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_template_secondary_uom,product.template.secondary.uom,model_product_template,,1,1,1,1
+access_sale_order_line_secondary_uom,sale.order.line.secondary.uom,model_sale_order_line,,1,1,1,1
+access_purchase_order_line_secondary_uom,purchase.order.line.secondary.uom,model_purchase_order_line,,1,1,1,1
+access_stock_move_secondary_uom,stock.move.secondary.uom,model_stock_move,,1,1,1,1
+access_account_move_line_secondary_uom,account.move.line.secondary.uom,model_account_move_line,,1,1,1,1

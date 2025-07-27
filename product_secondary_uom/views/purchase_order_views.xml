@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit Purchase Order Form View: Add Secondary Qty & UOM in Order Lines -->
+    <record id="view_purchase_order_form_secondary_uom" model="ir.ui.view">
+        <field name="name">purchase.order.form.secondary.uom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                <field name="secondary_qty" readonly="1"/>
+                <field name="secondary_uom_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Optional: Also add to form popup for purchase.order.line -->
+    <record id="view_purchase_order_line_form_secondary_uom" model="ir.ui.view">
+        <field name="name">purchase.order.line.form.secondary.uom</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_line"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="secondary_qty" readonly="1"/>
+                <field name="secondary_uom_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

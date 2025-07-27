@@ -1,5 +1,8 @@
 from odoo import http
 from odoo.http import request
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class AdmissionWebsite(http.Controller):
 
@@ -15,16 +18,25 @@ class AdmissionWebsite(http.Controller):
 
     @http.route('/nursery/submit', type='http', auth='public', website=True, methods=['POST'])
     def admission_submit(self, **post):
+        _logger.info("Form POST received: %s", post)
+
         try:
-            request.env['nursery.admission'].sudo().create({
+            stage = request.env['nursery.admission.stage'].sudo().search([('name', '=', 'Submitted')], limit=1)
+            parent_id = post.get('parent_id')
+
+            admission = request.env['nursery.admission'].sudo().create({
                 'child_name': post.get('child_name'),
                 'birth_date': post.get('birth_date'),
                 'gender': post.get('gender'),
                 'reason_for_applying': post.get('reason_for_applying'),
-                'parent_id': int(post.get('parent_id')),
-                'status': 'submitted',
+                'parent_id': int(parent_id) if parent_id and parent_id.isdigit() else False,
+                'stage_id': stage.id if stage else False,
             })
+
+            _logger.info("Admission created with ID: %s", admission.id)
+
         except Exception as e:
+            _logger.error("Error submitting admission form: %s", e)
             return request.render('website.500', {'error': str(e)})
 
         return request.redirect('/nursery/thankyou')
@@ -32,7 +44,3 @@ class AdmissionWebsite(http.Controller):
     @http.route('/nursery/thankyou', type='http', auth='public', website=True)
     def admission_thank_you(self, **kwargs):
         return request.render('nursery_admission_buttons_fix.admission_thankyou')
-
-    @http.route('/nursery/test', type='http', auth='public', website=True)
-    def test_route(self, **kwargs):
-        return "Test Route is Working"

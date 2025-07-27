@@ -1,0 +1,14 @@
+<odoo>
+    <record id="action_nursery_admission" model="ir.actions.act_window">
+        <field name="name">Admissions</field>
+        <field name="res_model">nursery.admission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_nursery_admission_root" name="Nursery" sequence="10"/>
+    <menuitem id="menu_nursery_admission"
+              name="Admissions"
+              parent="menu_nursery_admission_root"
+              action="nursery_admission_buttons_fix.action_nursery_admission"
+              sequence="20"/>
+</odoo>

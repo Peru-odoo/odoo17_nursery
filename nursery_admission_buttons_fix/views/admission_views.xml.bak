@@ -41,7 +41,6 @@
                         </div>
 
                         <group>
-                            <field name="child_name"/>
                             <field name="birth_date"/>
                             <field name="gender"/>
                             <field name="application_date" readonly="1"/>
