@@ -1,0 +1,102 @@
+<odoo>
+  <record id="purchase_order_form_secondary_uom" model="ir.ui.view">
+    <field name="name">purchase.order.form.secondary.uom</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+
+      <!-- Inline list (tree) -->
+      <xpath expr="//field[@name='order_line']/tree" position="replace">
+        <tree editable="bottom">
+          <field name="display_type" column_invisible="1" optional="hide"/>
+          <field name="sequence" widget="handle"/>
+
+          <field name="product_id" optional="show"/>
+          <field name="name" optional="show"/>
+
+          <!-- Make controller available to modifiers -->
+          <field name="use_secondary_input" invisible="1" optional="hide"/>
+
+          <!-- Primary qty is editable only when not using secondary, and only if a product is chosen -->
+          <field name="product_qty"
+                 string="Quantity"
+                 optional="show"
+                 readonly="use_secondary_input or not product_id"/>
+
+          <field name="product_uom_category_id" column_invisible="1" optional="hide"/>
+          <field name="product_uom" string="UoM" optional="show"/>
+
+          <!-- Visible toggle; disabled until a product is set -->
+          <field name="use_secondary_input"
+                 widget="boolean_toggle"
+                 string="Enter in Secondary UoM"
+                 optional="show"
+                 readonly="not product_id"
+                 groups="secondary_uom_all.group_secondary_uom_purchase"/>
+
+          <!-- Secondary qty/uom: only enabled after product & toggle -->
+          <field name="secondary_qty"
+                 string="Secondary Qty"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_purchase"
+                 invisible="not secondary_uom_id"
+                 readonly="(not product_id) or (not use_secondary_input)"/>
+          <field name="secondary_uom_category_id" column_invisible="1" optional="hide"/>
+          <field name="secondary_uom_id"
+                 string="Secondary UOM"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_purchase"
+                 invisible="not secondary_uom_id"
+                 readonly="(not product_id) or (not use_secondary_input)"
+                 domain="[('category_id', '=', secondary_uom_category_id)]"/>
+
+          <field name="company_id" column_invisible="1" optional="hide"/>
+          <field name="price_unit" string="Unit Price" optional="show"/>
+          <field name="taxes_id"  string="Taxes"     optional="show"/>
+          <field name="date_planned" optional="show"/>
+        </tree>
+      </xpath>
+
+      <!-- Popup editor (optional guards; here id is known so not strictly necessary) -->
+      <xpath expr="//field[@name='order_line']/form" position="replace">
+        <form string="PO Line">
+          <group>
+            <field name="product_id"/>
+            <field name="name"/>
+
+            <field name="use_secondary_input" invisible="1"/>
+            <field name="product_qty" string="Quantity" readonly="use_secondary_input or not product_id"/>
+
+            <field name="product_uom_category_id" invisible="1"/>
+            <field name="product_uom" string="UoM"/>
+
+            <field name="use_secondary_input"
+                   widget="boolean_toggle"
+                   string="Enter in Secondary UoM"
+                   readonly="not product_id"
+                   groups="secondary_uom_all.group_secondary_uom_purchase"/>
+
+            <field name="secondary_qty"
+                   string="Secondary Qty"
+                   groups="secondary_uom_all.group_secondary_uom_purchase"
+                   invisible="not secondary_uom_id"
+                   readonly="(not product_id) or (not use_secondary_input)"/>
+            <field name="secondary_uom_category_id" invisible="1"/>
+            <field name="secondary_uom_id"
+                   string="Secondary UOM"
+                   groups="secondary_uom_all.group_secondary_uom_purchase"
+                   invisible="not secondary_uom_id"
+                   readonly="(not product_id) or (not use_secondary_input)"
+                   domain="[('category_id', '=', secondary_uom_category_id)]"/>
+
+            <field name="company_id" invisible="1"/>
+            <field name="price_unit"/>
+            <field name="taxes_id"/>
+            <field name="date_planned"/>
+          </group>
+        </form>
+      </xpath>
+
+    </field>
+  </record>
+</odoo>

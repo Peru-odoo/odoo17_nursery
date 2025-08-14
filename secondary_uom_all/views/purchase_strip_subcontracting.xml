@@ -1,0 +1,15 @@
+<odoo>
+  <record id="purchase_order_form_strip_subcontracting" model="ir.ui.view">
+    <field name="name">purchase.order.form.strip.subcontracting.counter</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <!-- ensure this runs last -->
+    <field name="priority">2000</field>
+    <field name="arch" type="xml">
+      <!-- Remove either the button containing the field OR the bare field -->
+      <xpath expr="//button[.//field[@name='subcontracting_resupply_picking_count']]
+                   | //field[@name='subcontracting_resupply_picking_count']"
+             position="replace"/>
+    </field>
+  </record>
+</odoo>

@@ -1,0 +1,160 @@
+<odoo>
+  <record id="view_order_form_secondary_uom" model="ir.ui.view">
+    <field name="name">sale.order.form.secondary.uom</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_line']/tree" position="replace">
+        <tree editable="bottom">
+          <!-- hidden tech fields -->
+          <field name="display_type" column_invisible="1" optional="hide"/>
+
+          <!-- row reorder handle (no header) -->
+          <field name="sequence" widget="handle"/>
+
+          <!-- visible columns (marked optional to enable the sliders icon) -->
+          <field name="product_id" optional="show"/>
+          <field name="name" optional="show"/>
+          <field name="product_uom_qty" string="Quantity" optional="show"/>
+
+          <!-- helper for UoM domain; hide header -->
+          <field name="product_uom_category_id" column_invisible="1" optional="hide"/>
+
+          <!-- single visible UoM -->
+          <field name="product_uom" string="UoM" optional="show"/>
+
+          <!-- secondary columns -->
+          <field name="secondary_qty"
+                 string="Secondary Qty"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_sale"
+                 invisible="not secondary_uom_id"/>
+          <field name="secondary_uom_category_id" column_invisible="1" optional="hide"/>
+          <field name="secondary_uom_id"
+                 string="Secondary UOM"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_sale"
+                 invisible="not secondary_uom_id"
+                 domain="[('category_id', '=', secondary_uom_category_id)]"/>
+
+          <!-- needed for taxes domain; hide header -->
+          <field name="company_id" column_invisible="1" optional="hide"/>
+
+          <field name="price_unit" string="Unit Price" optional="show"/>
+          <field name="tax_id" string="Taxes" optional="show"/>
+        </tree>
+      </xpath>
+    </field>
+  </record>
+</odoo>
+
+<!--<odoo>-->
+<!--  <record id="view_order_form_secondary_uom" model="ir.ui.view">-->
+<!--    <field name="name">sale.order.form.secondary.uom</field>-->
+<!--    <field name="model">sale.order</field>-->
+<!--    <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <xpath expr="//field[@name='order_line']/tree" position="replace">-->
+<!--              <tree editable="bottom">-->
+<!--                &lt;!&ndash; keep display_type hidden &ndash;&gt;-->
+<!--                <field name="display_type" column_invisible="1" optional="hide"/>-->
+
+<!--                &lt;!&ndash; SHOW the reorder handle &ndash;&gt;-->
+<!--                <field name="sequence" widget="handle"/>-->
+
+<!--                <field name="product_id"/>-->
+<!--                <field name="name"/>-->
+<!--                <field name="product_uom_qty" string="Quantity"/>-->
+
+<!--                <field name="product_uom_category_id" column_invisible="1" optional="hide"/>-->
+<!--                <field name="product_uom" string="UoM"/>-->
+
+<!--                <field name="secondary_qty"-->
+<!--                       string="Secondary Qty"-->
+<!--                       groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                       invisible="not secondary_uom_id"/>-->
+<!--                <field name="secondary_uom_category_id" column_invisible="1" optional="hide"/>-->
+<!--                <field name="secondary_uom_id"-->
+<!--                       string="Secondary UOM"-->
+<!--                       groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                       invisible="not secondary_uom_id"-->
+<!--                       domain="[('category_id', '=', secondary_uom_category_id)]"/>-->
+
+<!--                <field name="company_id" column_invisible="1" optional="hide"/>-->
+<!--                <field name="price_unit" string="Unit Price"/>-->
+<!--                <field name="tax_id" string="Taxes"/>-->
+<!--              </tree>-->
+<!--        </xpath>-->
+
+
+
+
+<!--    </field>-->
+<!--  </record>-->
+<!--</odoo>-->
+
+<!--&lt;!&ndash; Inline tree: full control, single UoM, hide technical columns &ndash;&gt;-->
+<!--      <xpath expr="//field[@name='order_line']/tree" position="replace">-->
+<!--        <tree editable="bottom">-->
+<!--          &lt;!&ndash; hide columns entirely (no header) &ndash;&gt;-->
+<!--          <field name="display_type" column_invisible="1" optional="hide"/>-->
+<!--          <field name="sequence" column_invisible="1" optional="hide"/>-->
+
+<!--          <field name="product_id"/>-->
+<!--          <field name="name"/>-->
+<!--          <field name="product_uom_qty" string="Quantity"/>-->
+
+<!--          &lt;!&ndash; helper for UoM domain; hide column header as well &ndash;&gt;-->
+<!--          <field name="product_uom_category_id" column_invisible="1" optional="hide"/>-->
+
+<!--          &lt;!&ndash; single visible UoM &ndash;&gt;-->
+<!--          <field name="product_uom" string="UoM"/>-->
+
+<!--          &lt;!&ndash; secondary columns &ndash;&gt;-->
+<!--          <field name="secondary_qty"-->
+<!--                 string="Secondary Qty"-->
+<!--                 groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                 invisible="not secondary_uom_id"/>-->
+<!--          <field name="secondary_uom_category_id" column_invisible="1" optional="hide"/>-->
+<!--          <field name="secondary_uom_id"-->
+<!--                 string="Secondary UOM"-->
+<!--                 groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                 invisible="not secondary_uom_id"-->
+<!--                 domain="[('category_id', '=', secondary_uom_category_id)]"/>-->
+
+<!--          &lt;!&ndash; needed for Taxes domain; hide column header &ndash;&gt;-->
+<!--          <field name="company_id" column_invisible="1" optional="hide"/>-->
+
+<!--          <field name="price_unit" string="Unit Price"/>-->
+<!--          <field name="tax_id" string="Taxes"/>-->
+<!--        </tree>-->
+<!--      </xpath>-->
+
+<!--      &lt;!&ndash; Popup editor: same order (invisible is enough here) &ndash;&gt;-->
+<!--      <xpath expr="//field[@name='order_line']/form" position="replace">-->
+<!--        <form string="Order Line">-->
+<!--          <group>-->
+<!--            <field name="product_id"/>-->
+<!--            <field name="name"/>-->
+<!--            <field name="product_uom_qty" string="Quantity"/>-->
+
+<!--            <field name="product_uom_category_id" invisible="1"/>-->
+<!--            <field name="product_uom" string="UoM"/>-->
+
+<!--            <field name="secondary_qty"-->
+<!--                   string="Secondary Qty"-->
+<!--                   groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                   invisible="not secondary_uom_id"/>-->
+<!--            <field name="secondary_uom_category_id" invisible="1"/>-->
+<!--            <field name="secondary_uom_id"-->
+<!--                   string="Secondary UOM"-->
+<!--                   groups="secondary_uom_all.group_secondary_uom_sale"-->
+<!--                   invisible="not secondary_uom_id"-->
+<!--                   domain="[('category_id', '=', secondary_uom_category_id)]"/>-->
+
+<!--            <field name="company_id" invisible="1"/>-->
+<!--            <field name="price_unit" string="Unit Price"/>-->
+<!--            <field name="tax_id" string="Taxes"/>-->
+<!--          </group>-->
+<!--        </form>-->
+<!--      </xpath>-->
