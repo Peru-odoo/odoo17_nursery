@@ -1,14 +1,13 @@
 {
-    'name': 'Negative Stock Control',  # Module name shown in Odoo Apps list
-    #'version': '17.0.1.0.0',  # Version format: OdooVersion.Major.Minor.Fix
-    'summary': 'Add option to allow or disallow negative stock globally',  # Short description in Apps list
-    'description': 'Blocks stock moves that would cause negative stock if the setting is disabled.',  # Longer description
-    'author': 'Basel Amr Triple A',  # Your name or company
-    'depends': ['stock'],  # This module needs Odoo's stock module to work
+    'name': 'Negative Stock Control',  
+    #'version': '17.0.1.0.0',  
+    'summary': 'Add option to allow or disallow negative stock globally', 
+    'author': 'Basel Amr Triple A',  
+    'depends': ['stock'],  
     'data': [
         'views/stock_config_settings_view.xml',
         'security/ir.model.access.csv',
     ],
-    'installable': True,  # Can be installed
-    'application': False,  # Not a standalone app, but an extra feature
+    'installable': True,  
+    'application': False,  
 }
