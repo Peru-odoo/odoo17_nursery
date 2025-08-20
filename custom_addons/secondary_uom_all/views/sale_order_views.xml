@@ -1,0 +1,51 @@
+<odoo>
+  <record id="view_order_form_secondary_uom" model="ir.ui.view">
+    <field name="name">sale.order.form.secondary.uom</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='order_line']/tree" position="replace">
+        <tree editable="bottom">
+          <!-- hidden tech fields -->
+          <field name="display_type" column_invisible="1" optional="hide"/>
+
+          <!-- row reorder handle (no header) -->
+          <field name="sequence" widget="handle"/>
+
+          <!-- visible columns -->
+          <field name="product_id" optional="show"/>
+          <field name="name" optional="show"/>
+          <field name="product_uom_qty" string="Quantity" optional="show"/>
+
+          <!-- helper for UoM domain; hide header (kept for compatibility) -->
+          <field name="product_uom_category_id" column_invisible="1" optional="hide"/>
+
+          <!-- primary UoM -->
+          <field name="product_uom" string="UoM" optional="show"/>
+
+          <!-- secondary columns -->
+          <field name="secondary_qty"
+                 string="Secondary Qty"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_sale"
+                 invisible="not product_id"/>
+          <field name="secondary_uom_category_id" column_invisible="1" optional="hide"/>
+          <field name="secondary_uom_id"
+                 string="Secondary UOM"
+                 optional="show"
+                 groups="secondary_uom_all.group_secondary_uom_sale"
+                 invisible="not product_id"
+                 domain="[]"/>
+          <!-- If you really want it required once a product is chosen, uncomment: -->
+          <!-- required="product_id" -->
+
+          <!-- needed for taxes domain; hide header -->
+          <field name="company_id" column_invisible="1" optional="hide"/>
+
+          <field name="price_unit" string="Unit Price" optional="show"/>
+          <field name="tax_id" string="Taxes" optional="show"/>
+        </tree>
+      </xpath>
+    </field>
+  </record>
+</odoo>
