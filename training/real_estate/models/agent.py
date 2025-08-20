@@ -2,7 +2,7 @@ from odoo import models, fields
 
 class Agent(models.Model):
     _name = 'real.estate.agent'
-    _description = 'Real Estate Agent'
+    _description = 'real_estate Agent'
 
     name = fields.Char(required=True)
     email = fields.Char()

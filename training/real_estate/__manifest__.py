@@ -1,9 +1,9 @@
 {
-    "name": "Real Estate Management",
+    "name": "real_estate Management",
     "version": "1.0",
     "depends": ["base", "web", "mail"],
     "author": "Your Company",
-    "category": "Real Estate",
+    "category": "real_estate",
     "description": "Manage properties, agents, bookings, and print reports.",
     "data": [
         "security/ir.model.access.csv",
