@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_api_access_token,access_api_access_token,model_api_access_token,,1,1,1,1
+bista_wms_api.access_bista_wms_config_settings,access_bista_wms_config_settings,bista_wms_api.model_bista_wms_config_settings,base.group_user,1,1,1,1
+bista_wms_api.access_bista_app_change,access_bista_app_change,bista_wms_api.model_bista_app_change,base.group_user,1,1,1,1

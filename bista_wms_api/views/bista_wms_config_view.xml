@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bista_wms_config_settings_tree" model="ir.ui.view">
+        <field name="name">bista.wms.config.settings.list</field>
+        <field name="model">bista.wms.config.settings</field>
+        <field name="arch" type="xml">
+            <list string="WMS Config Settings">
+                <field name="warehouse_id"/>
+                <field name="company_id"/>
+                <field name="product_packages"/>
+                <field name="product_packaging"/>
+                <field name="wms_licensing_key"/>
+                <field name="batch_transfer"/>
+                <field name="barcode_scanner"/>
+                <field name="units_of_measure"/>
+                <field name="multi_step_routes"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="bista_wms_config_settings_form" model="ir.ui.view">
+        <field name="name">bista.wms.config.settings.form</field>
+        <field name="model">bista.wms.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="WMS Config Settings">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="warehouse_id"/>
+                            <field name="company_id"/>
+                            <field name="product_packages"/>
+                            <field name="product_packaging"/>
+                            <field name="wms_licensing_key"/>
+                            <field name="batch_transfer"/>
+                            <field name="barcode_scanner"/>
+                            <field name="delivery_method"/>
+                            <field name="product_variants"/>
+                            <field name="use_qr_code"/>
+                            <field name="use_qr_code_print_label"/>
+                        </group>
+                        <group>
+                            <field name="use_qr_code_picking_operations"/>
+                            <field name="use_qr_code_batch_operations"/>
+                            <field name="units_of_measure"/>
+                            <field name="storage_locations"/>
+                            <field name="multi_step_routes"/>
+                            <field name="storage_categories"/>
+                            <field name="quality"/>
+                            <field name="barcode_gst1"/>
+                            <field name="lot_on_invoice"/>
+                            <field name="consignment"/>
+                            <field name="expiration_dates"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bista_wms_config_settings" model="ir.actions.act_window">
+        <field name="name">WMS Config Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bista.wms.config.settings</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bista_wms_config"
+              name="Configuration"
+              parent="bista_wms_api.menu_bista_app_changes_parent_menu"
+              action="action_bista_wms_config_settings"
+              groups = "base.group_system"
+              sequence="0"/>
+</odoo>

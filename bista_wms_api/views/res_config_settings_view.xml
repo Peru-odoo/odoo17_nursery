@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="res_config_settings_view_form" model="ir.ui.view">
+		<field name="name">res.config.settings.view.form.inherit.wms.api</field>
+		<field name="model">res.config.settings</field>
+		<field name="priority" eval="5"/>
+		<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form" position="inside">
+				<app data-string="WMS API" string="WMS API" name="bista_wms_api">
+					<block title="WMS API" name="bista_wms_api_setting_container">
+						<setting id="bista_wms_api_settings"
+						         string="WMS Licensing Key">
+							<div class="content-group">
+								<div class="row mt8 text-muted">
+									Please provide the WMS Licensing Key provided upon purchase.
+								</div>
+								<div class="row mt8" id="wms_licensing_key_field">
+									<!--<label for="wms_licensing_key" class="col-lg-3"/>-->
+									<field name="wms_licensing_key" class="w-100"/>
+								</div>
+								<div class="row mt8 text-left" style="position:relative;">
+									<a class="oe_link" href="https://www.bistasolutions.com/" target="_blank">
+										Get WMS Licensing Key
+										<i class="fa fa-arrow-right"/>
+									</a>
+								</div>
+							</div>
+						</setting>
+						<setting help="Enable Search Limit For WMS Mobile App">
+                            <field name="enable_search_limit"/>
+							<label for="def_search_limit" class="col-lg-4" invisible='not enable_search_limit'/>
+							<field name="def_search_limit" invisible='not enable_search_limit'/>
+                        </setting>
+					</block>
+					<block>
+                        <setting help="Enable inventory user restriction">
+                            <field name="user_check_restriction"/>
+                        </setting>
+						<setting help="Restrict Stock Quants in Location">
+                            <field name="restrict_stock_quants_in_location"/>
+                        </setting>
+                    </block>
+				</app>
+			</xpath>
+		</field>
+	</record>
+
+    <record id="action_wms_api_general_config" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'bista_wms_api'}</field>
+    </record>
+</odoo>

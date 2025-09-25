@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='wms_stock_warehouse_cron' model='ir.cron'>
+        <field name='name'>Fill Value:Operation Types</field>
+        <field name='model_id' ref='model_stock_warehouse'/>
+        <field name='state'>code</field>
+        <field name='code'>model.action_pick_operation()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field> 
+        <field name="active" eval="False" />
+        <field name='priority' eval="1"/>
+    </record>
+
+</odoo>

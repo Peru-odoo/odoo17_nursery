@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        stock_picking-->
+        <record id="stock_picking_user_rule" model="ir.rule">
+            <field name="name">Stock picking user rule</field>
+            <field ref="model_stock_picking" name="model_id"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+        </record>
+
+        <record id="stock_picking_admin_rule" model="ir.rule">
+            <field name="name">Stock picking admin rule</field>
+            <field ref="model_stock_picking" name="model_id"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('stock.group_stock_manager'))]"/>
+        </record>
+
+        <!--        stock_picking_batch-->
+        <record id="stock_picking_batch_user_rule" model="ir.rule">
+            <field name="name">Stock picking batch user rule</field>
+            <field ref="model_stock_picking_batch" name="model_id"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('stock.group_stock_user'))]"/>
+        </record>
+
+        <record id="stock_picking_batch_admin_rule" model="ir.rule">
+            <field name="name">Stock picking batch admin rule</field>
+            <field ref="model_stock_picking_batch" name="model_id"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('stock.group_stock_manager'))]"/>
+        </record>
+
+    </data>
+</odoo>

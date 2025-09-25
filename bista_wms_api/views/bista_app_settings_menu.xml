@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_bista_app_changes_parent_menu"
+              name="WMS Mobile App Settings"
+              parent="stock.menu_stock_config_settings"
+              groups = "base.group_system"
+              sequence="51"/>
+</odoo>

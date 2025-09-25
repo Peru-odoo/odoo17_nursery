@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate='1'>
+        <record id="bista_wms_api.access_token_expires_in" model="ir.config_parameter">
+            <field name="key">bista_wms_api.access_token_expires_in</field>
+            <field name="value">7776000</field>
+        </record>
+
+        <record id="bista_wms_api.http_status_code" model="ir.config_parameter">
+            <field name="key">bista_wms_api.http_status_code</field>
+            <field name="value">0</field>
+        </record>
+
+        <record id="bista_wms_api.enable_search_limit" model="ir.config_parameter">
+            <field name="key">bista_wms_api.enable_search_limit</field>
+            <field name="value">True</field>
+        </record>
+        <record id="bista_wms_api.def_search_limit" model="ir.config_parameter">
+            <field name="key">bista_wms_api.def_search_limit</field>
+            <field name="value">10</field>
+        </record>
+        <record id="bista_wms_api.restrict_stock_quants_in_location" model="ir.config_parameter">
+            <field name="key">bista_wms_api.restrict_stock_quants_in_location</field>
+            <field name="value">False</field>
+        </record>
+    </data>
+</odoo>
