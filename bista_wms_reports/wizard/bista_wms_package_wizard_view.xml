@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="bista_wms_package_wizard_form" model="ir.ui.view">
+		<field name="name">bista.wms.package.wizard.form</field>
+		<field name="model">bista.wms.package</field>
+		<field name="mode">primary</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="result_package_ids" widget="many2many_tags"/>
+						<field name="print_option" widget="radio"/>
+					</group>
+				</sheet>
+				<footer>
+					<button name="process" string="Print" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_open_bista_packages" model="ir.actions.act_window">
+		<field name="name">Product Packages</field>
+		<field name="res_model">bista.wms.package</field>
+		<field name="view_ids"
+		       eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('bista_wms_package_wizard_form')})]"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

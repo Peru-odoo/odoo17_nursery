@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+
+		<template id="label_transfer_template_view_pdf_inherit" inherit_id="stock.label_transfer_template_view_pdf">
+			<xpath expr="//div[@t-field='move_line.lot_name']" position="replace">
+				<div t-options="{'width': 150, 'height': 150}">
+					<img t-att-src="'/report/barcode/QR/%s' % move_line.lot_name" style="width:100%; height:4rem;"/>
+				</div>
+			</xpath>
+		</template>
+
+	</data>
+</odoo>

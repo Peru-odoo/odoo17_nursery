@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <template id="report_picking_batch_inherit" inherit_id="stock_picking_batch.report_picking_batch">
+            <!--<xpath expr="//div[hasclass('d-flex')]" position="attributes">-->
+            <!--<attribute name="class"></attribute>-->
+            <!--<attribute name="t-attf-style">display: -webkit-box; -webkit-box-orient: horizontal; -webkit-align-items: center; </attribute>-->
+            <!--</xpath>-->
+
+
+            <!-- Transfer name -->
+            <xpath expr="//div[hasclass('me-auto')]" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <div class="me-auto">
+                        <img style="margin-left: 30px;"
+                             t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=120&amp;height=120&amp;humanreadable=1' % o.name"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-field="o.name"
+                         t-options="{'widget': 'barcode', 'width': 600, 'height': 150, 'img_style': 'width:300px;height:50px;'}"/>
+                </t>
+            </xpath>
+
+
+<!--            <xpath expr="//span[@t-field='o.name']" position="replace">-->
+<!--                <div t-if="o.get_qr_batch_operations_settings()" class="ml-4">-->
+<!--                    <img style="margin-left: 30px;"-->
+<!--                         t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=120&amp;height=120&amp;humanreadable=1' % o.name"/>-->
+<!--                </div>-->
+<!--                <div t-else="">-->
+<!--                    <div t-field="o.name"-->
+<!--                         t-options="{'widget': 'barcode', 'width': 600, 'height': 150, 'img_style': 'width:300px;height:50px;'}"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+
+            <!-- First Table (Pickings Table) -->
+<!--            <xpath expr="//table[1]//thead/tr/th[2]" position="replace">-->
+<!--                <t t-if="o.get_qr_batch_operations_settings()">-->
+<!--                    <th>QR</th>-->
+<!--                </t>-->
+<!--                <t t-else="">-->
+<!--                    <th>Barcode</th>-->
+<!--                </t>-->
+<!--            </xpath>-->
+
+            <xpath expr="//table[1]//thead" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <thead style="text-align: left;">
+                        <tr>
+                            <th>Transfer</th>
+                            <th>QR</th>
+                            <th>Status</th>
+                            <th>Scheduled Date</th>
+                        </tr>
+                    </thead>
+                </t>
+                <t t-else="">
+                    <thead>
+                        <tr>
+                            <th>Transfer</th>
+                            <th>Barcode</th>
+                            <th>Status</th>
+                            <th>Scheduled Date</th>
+                        </tr>
+                    </thead>
+                </t>
+            </xpath>
+
+            <xpath expr="//table[1]//tbody/tr/td[2]/span" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <div>
+                        <img t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=80&amp;height=80&amp;humanreadable=1' % pick.name"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-field="pick.name"
+                         t-options="{'widget': 'barcode', 'quiet': 0, 'width': 400, 'height': 100, 'img_style': 'width:200px;height:50px;'}"/>
+                </t>
+            </xpath>
+
+            <!-- Second Table (Product Table) -->
+            <xpath expr="//table[2]//thead/tr/th[5]/strong" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <strong>Product QR</strong>
+                </t>
+                <t t-else="">
+                    <strong>Product Barcode</strong>
+                </t>
+            </xpath>
+            <xpath expr="//table[2]//tbody/tr/td[4]/span" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <div t-if="move_operation.lot_id or move_operation.lot_name">
+                        <img t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=50&amp;height=50&amp;humanreadable=1' % move_operation.lot_id.name"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-if="move_operation.lot_id or move_operation.lot_name" t-field="move_operation.lot_id.name"
+                         t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 600, 'height': 100, 'img_style': 'width:100%;height:35px;'}"/>
+                </t>
+            </xpath>
+            <xpath expr="//table[2]//tbody/tr/td[5]/span" position="replace">
+                <t t-if="o.get_qr_batch_operations_settings()">
+                    <div>
+                        <img t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=50&amp;height=50&amp;humanreadable=1' % move_operation.product_id.barcode"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div t-field="move_operation.product_id.barcode"
+                         t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 600, 'height': 100, 'img_style': 'width:100%;height:35px;'}"/>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

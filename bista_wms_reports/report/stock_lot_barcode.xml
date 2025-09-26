@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_lot_label_wms" model="ir.actions.report">
+        <field name="name">WMS Lot/Serial(PDF)</field>
+        <field name="model">stock.lot</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bista_wms_reports.report_lot_label_wms</field>
+        <field name="report_file">bista_wms_reports.report_lot_label_wms</field>
+        <field name="paperformat_id" ref="product.paperformat_label_sheet_dymo"/>
+        <field name="print_report_name">'Lot-Serial - %s' % object.name</field>
+        <field name="binding_model_id" ref="stock.model_stock_lot"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_lot_label_wms">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.html_container">
+                    <t t-set="use_qr_code"
+                       t-value="request.env['ir.config_parameter'].sudo().get_param('bista_wms_reports.use_qr_code_print_label')"/>
+                    <div class="page" style="page-break-before: always;">
+                        <t t-set="final_barcode" t-value="''"/>
+                        <t t-if="env.user.has_group('stock.group_stock_lot_print_gs1')">
+                            <t t-if="o.product_id.valid_ean" t-set="final_barcode"
+                               t-value="'01' + '0' * (14 - len(o.product_id.barcode)) + o.product_id.barcode"/>
+                            <t name="gs1_datamatrix_lot" t-if="o.product_id.tracking == 'lot'"
+                               t-set="final_barcode" t-value="(final_barcode or '') + '10' + o.name"/>
+                            <t t-elif="o.product_id.tracking == 'serial'" t-set="final_barcode"
+                               t-value="(final_barcode or '') + '21' + o.name"/>
+                        </t>
+                        <div t-att-style="'border: 1px solid black;width:50mm;height:32mm;margin-top:1mm;padding-top:1.5mm'">
+                            <t t-if="use_qr_code">
+                                <div t-field="o.product_id.display_name"
+                                     t-att-style="'text-align:justify;font-size:10px;padding-left:2mm'"/>
+                                <div class="qrcode" t-att-style="'padding-top:10px; padding-left: 60px;'">
+                                    <img t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=70&amp;height=70&amp;humanreadable=1' % o.name"/>
+                                </div>
+                                <div class="o_label_name"
+                                     style="text-align: center;font-size:9px;background-color: transparent;">
+                                    Lot no:<span t-out="o.name"/>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div t-field="o.product_id.display_name"
+                                     t-att-style="'text-align:center;font-size:10px;padding-top:2mm;padding-left:2mm;'"/>
+                                <t t-if="env.user.has_group('stock.group_stock_lot_print_gs1')">
+                                    <div t-if="final_barcode"
+                                         t-att-style="'padding-top:4mm;'"
+                                         t-out="o.name"
+                                         t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': 'width:48mm; height:12mm'}"/>
+                                    <div class="o_label_name"
+                                         t-att-style="'text-align:center;font-size:10px;padding-right:5mm;padding-top:1mm;background-color: transparent;'">
+                                        Lot no:<span t-out="o.name"/>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="product.paperformat_label_sheet_dymo" model="report.paperformat">
+            <field name="page_width">40</field>
+        </record>
+
+	</data>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="package_barcode_pdf_custom_format" model="report.paperformat">
+            <field name="name">Package Barcode PDF Custom Format</field>
+            <field name="format">custom</field>
+            <field name="orientation">Portrait</field>
+            <field name="page_height">32</field>
+            <field name="page_width">57</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+            <field name="report_ids" eval="[(4, ref('stock.action_report_quant_package_barcode_small'))]" />
+        </record>
+    </data>
+</odoo>

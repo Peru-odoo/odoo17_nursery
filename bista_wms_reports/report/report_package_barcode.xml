@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="wms_report_package_barcode_small_custom" inherit_id="stock.report_package_barcode_small">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">width:50mm;height:32mm;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/t[@t-else='']" position="replace">
+            <t t-else="">
+                <div class="row" style="page-break-before:always;">
+                    <div class="text-center col-12">
+                        <div t-field="o.name" style="padding-right:60px;padding-top:15px;"
+                             t-options="{'widget': 'barcode', 'width': 200, 'height': 50, 'img_style': 'width:200px;height:50px;'}"/>
+                        <div t-field="o.name" style="text-align:center;font-size:10px;"/>
+                    </div>
+                </div>
+                <div t-if="o.pack_date" class="col-12 text-center"
+                     style="text-align:center;font-size:10px; font-weight:bold;">Pack Date:
+                    <span t-field="o.pack_date"/>
+                </div>
+                <div class="row o_packaging_type" t-if="o.package_type_id">
+                    <div class="col-12 text-center" style="font-size:10px; font-weight:bold;">
+                        <span>Package Type:</span>
+                        <span t-field="o.package_type_id.name"/>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

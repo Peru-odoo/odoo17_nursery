@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bista.wms.package.access.public,bista.wms.packages.access.public,bista_wms_reports.model_bista_wms_package,base.group_user,1,1,1,1

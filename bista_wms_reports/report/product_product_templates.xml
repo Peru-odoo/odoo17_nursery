@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="report_simple_label_dymo_qr_code">
+			<div class="o_label_sheet o_label_dymo" t-att-style="padding_page">
+                <div class="o_label_full row" t-att-style="table_style">
+	                <div class="text-left col-6" style="padding:0;">
+	                    <div class="o_label_name" style="line-height: 130%;height:2.7em;background-color: transparent;">
+	                        <span style="text-align: justify;text-justify: inter-word;"
+	                              t-field="product.display_name"/>
+	                    </div>
+		                <div class="o_label_full o_label_small_text">
+		                    <div class="o_label_left_column">
+		                        <small class="text-nowrap" t-field="product.default_code"/>
+		                    </div>
+		                    <div class="text-right o_label_right_column" style="padding: 0 4px;">
+		                        <t t-if="product.is_product_variant">
+		                            <strong class="o_label_price_small" t-field="product.lst_price" t-options="{'widget': 'monetary', 'label_price': True}"/>
+		                        </t>
+		                        <t t-else="">
+		                            <strong class="o_label_price_small" t-field="product.list_price" t-options="{'widget': 'monetary', 'label_price': True}"/>
+		                        </t>
+		                        <!-- <div class="o_label_extra_data">
+		                            <t t-out="extra_html"/>
+		                        </div> -->
+		                    </div>
+		                </div>
+		                <div class="text-left o_label_small_text">
+			                <t t-if="is_picking">
+				                <span t-if="picking_data['partner'] and picking_data['picking_type'] == 'incoming'">
+				                    <small>Vendor: </small>
+				                    <span t-esc="picking_data['partner']" />
+				                </span>
+				                <span t-if="picking_data['date_done'] and picking_data['picking_type'] == 'incoming'">
+				                    <small>Received: </small>
+				                    <span t-esc="picking_data['date_done']" />
+				                </span>
+			                </t>
+			                <span>
+				                <t t-if="barcode and prod_exp_dates">
+					                <t t-foreach="prod_exp_dates" t-as="prod_exp_date">
+						                <t t-if="prod_exp_date[0] == barcode">
+						                    <t t-set="exp_date" t-value="prod_exp_date[1]"/>
+						                </t>
+					                </t>
+					                <!-- TODO: Add t-if for barcode & exp_date -->
+					                <t t-if="exp_date">
+					                    <small>Expiry: </small>
+					                    <span t-esc="exp_date" />
+					                </t>
+				                </t>
+			                </span>
+	                    </div>
+	                </div>
+                    <div class="text-center col-6 o_label_small_barcode"
+                         style="display:flex!important; flex-direction:column!important; justify-content:center!important; padding:0;">
+                        <t t-if="barcode">
+                            <span style="padding:0;">
+	                            <img t-att-src="'/report/barcode/?barcode_type=QR&amp;value=%s&amp;width=100&amp;height=100&amp;humanreadable=1' % barcode"/>
+                            </span>
+	                        <span class="o_label_name" style="line-height: 130%;height:2.7em;background-color: transparent;">
+		                        <span t-out="barcode"/>
+	                        </span>
+                        </t>
+                    </div>
+                </div>
+            </div>
+		</template>
+
+		<template id="report_productlabel_dymo_inherit" inherit_id="product.report_productlabel_dymo">
+<!--			<xpath expr="//t[@t-set='padding_page']" position="after">-->
+<!--				<t t-set="picking_detail" t-value="picking_data[0]" />-->
+<!--				<t t-set="prod_exp_dates" t-value="prod_exp_dates" />-->
+<!--			</xpath>-->
+			<xpath expr="//t[@t-call='product.report_simple_label_dymo']" position="replace">
+				<t t-if="print_label_qr_code_settings == 'True'">
+					<t t-call="bista_wms_reports.report_simple_label_dymo_qr_code"/>
+				</t>
+				<t t-else="">
+					<t t-call="product.report_simple_label_dymo"/>
+				</t>
+			</xpath>
+		</template>
+
+		<template id="report_simple_label_dymo_inherit" inherit_id="product.report_simple_label_dymo">
+			<xpath expr="//div[@t-out='barcode']" position="attributes">
+				<attribute name="style">padding:2mm;</attribute>
+			</xpath>
+			<xpath expr="//div[hasclass('o_label_name')]" position="attributes">
+				<attribute name="style">padding-left:6px;</attribute>
+<!--				<attribute name="style" add="padding-left: 6px;" separator=" "/>-->
+			</xpath>
+<!--			<xpath expr="//div[hasclass('o_label_name')]/span" position="replace">-->
+<!--				<span t-out="barcode" style="padding-left:2mm;"/>-->
+<!--			</xpath>-->
+			<xpath expr="//div[hasclass('o_label_left_column')]" position="replace">
+			</xpath>
+			<xpath expr="//div[hasclass('text-end')]" position="replace">
+			</xpath>
+		</template>
+
+	</data>
+</odoo>

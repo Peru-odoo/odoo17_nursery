@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="bista_stock_picking_form_view" model="ir.ui.view">-->
+<!--        <field name="name">bista.stock.picking.form.view</field>-->
+<!--        <field name="model">stock.picking</field>-->
+<!--        <field name="inherit_id" ref="stock.view_picking_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='action_open_label_type']" position="after">-->
+<!--                <button name="action_bista_package"-->
+<!--                        string="Print Package Barcode"-->
+<!--                        attrs="{'invisible': [('has_packages', '=', False)]}"-->
+<!--                        type="object"-->
+<!--                        help="Print Package Barcode reports (From Bista WMS Report module)" />-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- <record id="bista_stock_picking_form_view" model="ir.ui.view">
+        <field name="name">bista.stock.picking.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_label_type']" position="after">
+                <button name="action_bista_package"
+                        invisible="has_packages == False"
+                        string="Print Package Barcode"
+                        type="object"
+                        help="Print Package Barcode reports (From Bista WMS Report module)">
+                </button>
+            </xpath>
+        </field>
+    </record> -->
+
+
+    <record id="bista_stock_picking_form_view" model="ir.ui.view">
+        <field name="name">bista.stock.picking.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='do_print_picking']" position="after">
+                <button name="action_bista_package"
+                        invisible="has_packages == False"
+                        string="Print Package Barcode"
+                        type="object"
+                        help="Print Package Barcode reports (From Bista WMS Report module)">
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.qr.code</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="7"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="QR Code" string="QR Code" name="bista_wms_reports">
+                    <div class="app_settings_block"
+                     data-string="QR Code" string="QR Code" data-key="bista_wms_reports">
+                    <h2>QR Code</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="use_qr_code_print_label">
+                            <div class="o_setting_left_pane">
+                                <field name="use_qr_code_print_label" class="text-center oe_inline" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="use_qr_code_print_label"/>
+                                <div class="text-muted">
+                                    Enabling use QR Code in Product Label PDF instead of Barcode
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="use_qr_code_picking_operations">
+                            <div class="o_setting_left_pane">
+                                <field name="use_qr_code_picking_operations" class="text-center oe_inline" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="use_qr_code_picking_operations"/>
+                                <div class="text-muted">
+                                    Enabling use QR Code in Picking Operations PDF instead of Barcode
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="use_qr_code_batch_operations">
+                            <div class="o_setting_left_pane">
+                                <field name="use_qr_code_batch_operations" class="text-center oe_inline" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="use_qr_code_batch_operations"/>
+                                <div class="text-muted">
+                                    Enabling the use of QR Code in Batch/Wave Transfer Operations PDF instead of Barcode
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </app>
+            </xpath>
+        </field>
+	</record>
+
+    <record id="action_qr_code_general_config" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'bista_wms_reports'}</field>
+    </record>
+</odoo>
