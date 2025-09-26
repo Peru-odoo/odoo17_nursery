@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rfid_tag_import_view_form" model="ir.ui.view">
+        <field name="name">rfid.tag.import.form</field>
+        <field name="model">rfid.tag.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <label for="download_template_file" string="Download Template" class="oe_right"
+                               style="margin-right:1rem;"/>
+                        <button name="download_template_file" type="object" class="btn btn-sm btn-primary"
+                                icon="fa-download" string="Download"/>
+                    </group>
+                    <group>
+                        <label for="file_for_import" string="Upload RFID Tags" class="oe_right" style="margin-right:1rem;"/>
+                        <field name="file_for_import" nolabel="1"/>
+                    </group>
+                </group>
+<!--                <div colspan="2" style="display: flex;align-items: center;margin-bottom: 1rem;">-->
+<!--                    <label for="download_template_file" string="Download Template" class="oe_right"-->
+<!--                           style="margin-right:1rem;"/>-->
+<!--                    <button name="download_template_file" type="object" class="btn btn-primary"-->
+<!--                            icon="fa-download" string="Download"/>-->
+<!--                </div>-->
+<!--	            <div colspan="2" style="display: flex;align-items: center">-->
+<!--                    <label for="file_for_import" string="Upload RFID Tags" class="oe_right" style="margin-right:1rem;"/>-->
+<!--                    <field name="file_for_import" nolabel="1"/>-->
+<!--                </div>-->
+                <footer>
+	                <button name="action_import_rfid_data" type="object" default_focus="1"
+                            string="Import" class="oe_highlight" />
+                    <button string="Cancel" class="btn btn-default" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="rfid_tag_import_action" model="ir.actions.act_window">
+        <field name="name">Import RFID Tags</field>
+        <field name="res_model">rfid.tag.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_rfid_import" name="Import RFID" parent="menu_rfid_root" sequence="3"/>
+
+    <menuitem id="import_rfid_tag" name="Import RFID Tags" parent="menu_rfid_import"
+              sequence="5" action="rfid_tag_import_action" />
+</odoo>

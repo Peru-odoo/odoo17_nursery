@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="RFID" id="menu_rfid_root" sequence="150"
+        web_icon="bista_rfid,static/description/rfid_menu_bista.png"/>
+
+    <menuitem id="menu_rfid" name="RFID" parent="menu_rfid_root" sequence="2"/>
+
+    <menuitem id="all_rfid_tag" name="RFID Tags" parent="menu_rfid"
+              sequence="5" action="rfid_tag_view_act_window" />
+
+</odoo>

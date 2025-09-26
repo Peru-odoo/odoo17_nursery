@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+rfid.tag.access,rfid.tag.access,model_rfid_tag,base.group_user,1,1,1,1
+rfid.tag.import.access,rfid.tag.import.access,model_rfid_tag_import,base.group_user,1,1,1,1
+message.wizard.access,message.wizard.access,model_message_wizard,base.group_user,1,1,1,1
